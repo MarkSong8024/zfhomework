@@ -42,11 +42,11 @@ function resolvePromise(promise2, x, resolve, reject) {
                     called = true
                     resolvePromise(promise2, y, resolve, reject)
                 }, r => {
-                    if (called) return
-                    called = true
                     reject(r)
                 })
             } else {
+                if (called) return
+                called = true
                 resolve(x)
             }
         }
@@ -152,7 +152,7 @@ Promise.race = function (values) {
         }
     })
 }
-Promise.prototype.catch = function(errCallBack) {
+Promise.prototype.catch = function (errCallBack) {
     return this.then(null, errCallBack)
 }
 Promise.prototype.finally = function (callback) { // finally 是then的别名
